@@ -25,4 +25,4 @@ prog.elf: crt0.o main.o aica.o
 	$(DC_ARM7AS) $< -o $@
 
 clean:
-	-rm -f *.o *.srec *.elf 1ST_READ.BIN prog.bin *.bck
+	rm -f *.o *.srec *.elf *.bck stream.drv
