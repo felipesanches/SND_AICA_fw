@@ -77,6 +77,11 @@ int vol_to_log(int vol) {
 	return vol;
 }
 
+/* Stop the sound on a given channel */
+void aica_stop(int ch) {
+    CHNREG32(ch, 0) = (CHNREG32(ch, 0) & ~0x4000) | 0x8000;
+}
+
 /* Sets up a sound channel completely. This is generally good if you want
    a quick and dirty way to play notes. If you want a more comprehensive
    set of routines (more like PC wavetable cards) see below.
@@ -103,6 +108,7 @@ void aica_play(int ch, unsigned long smpptr, int mode, int loopst, int loopend,
 	/*for (i=CHNREG8(ch, 41); i<=0xff; i++) {
 		CHNREG8(ch, 41) = i;
 	} */
+
 	aica_stop(ch);
 	for (i=0; i<256; i++) {
 		asm("nop");
@@ -178,12 +184,6 @@ void aica_play(int ch, unsigned long smpptr, int mode, int loopst, int loopend,
 	/*for (i=0xff; i>=vol; i--)
 		CHNREG8(ch, 41) = i; */
 }
-
-/* Stop the sound on a given channel */
-void aica_stop(int ch) {
-	CHNREG32(ch, 0) = (CHNREG32(ch, 0) & ~0x4000) | 0x8000;
-}
-
 
 /* The rest of these routines can change the channel in mid-stride so you
    can do things like vibrato and panning effects. */
