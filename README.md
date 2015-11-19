@@ -22,3 +22,13 @@ Based on the comments in the souce files, these are the original authors of this
 * Dan Potter
 * mrbrown
 * Marcus
+
+## Building
+
+Install the the crosscompiler:
+
+> sudo apt-get install gcc-arm-none-eabi
+
+And run make to build the firmware image;
+
+> make
